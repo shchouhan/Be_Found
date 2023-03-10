@@ -1,0 +1,45 @@
+<div class = "tab">
+<h1 class = "abc">Welcome to Be Found!</h1>
+<% if searcher_signed_in? %> 
+  <p><%= notice %></p>
+  <div class = "abc"> Welcome <%= current_searcher.email %> </div> 
+  <div class = "abc"><%= button_to "Sign out", destroy_searcher_session_path, method: :delete %></div>
+  <% if current_searcher.searcher_type == "contractor"%>
+
+  <div class = "abc">
+  <%= link_to('Create New Post', new_post_path)%>
+  </div>
+  <div class = "abc">
+  <%= link_to('Show all posts', posts_path)%>
+  </div>
+  <%= form_with url: "/search", method: :get do |form| %>
+  <div class = "abc">
+  <%= form.label :category_type, "Search for:" %>
+  <%= form.select :category_type, ['Electrician', 'Carpenter', 'Painter', 'Plumber', 'Driver', 'Mechanic', 'Assistant', 'Nurse', 'Server', 'Janitor', 'Labor', 'Welder', 'Cheff', 'Housekeeper']%> 
+  <%= form.submit "Search" %>
+  </div>
+  <% end %>
+
+  <% else %>
+  <div class = "abc">
+  <%= link_to('Profile', '/home/show')%>
+  </div>
+  <br><br>
+  
+  <div class= "post">
+  <%= form_with url: "/search", method: :get do |form| %>
+  <div>
+  <%= form.label :Category %><br>
+  <%= form.select :job_role, ['Electrician', 'Carpenter', 'Painter', 'Plumber', 'Driver', 'Mechanic', 'Assistant', 'Nurse', 'Server', 'Janitor', 'Labor', 'Welder', 'Cheff', 'Housekeeper']%>  </div>   
+  </div>
+  <%= form.submit "Search" %>
+  <div class = "abc">
+  <%= link_to('Show all posts', posts_path)%>
+  </div>
+  <% end %>
+  <% end %>
+
+
+<% else %>
+  <%= button_to "Sign in", new_searcher_session_path %> 
+<% end %>

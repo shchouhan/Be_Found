@@ -1,0 +1,31 @@
+<%= form_with url: "/posts", model: @post do |form| %>
+
+  <% if @post.errors.any? %>
+    <% @post.errors.full_messages.each do |message| %>
+      <p class = "abc"><%= message %></p>
+    <% end %>
+  <% end %>
+  <div class= "nested-fields">
+  <% @post.categories.each do |category_type| %>
+    <%= form.fields_for category_type, index: category.id do |category_form| %>
+      <%= category_form.select :category, ['Electrician', 'Carpenter', 'Painter', 'Plumber', 'Driver', 'Mechanic', 'Assistant', 'Nurse', 'Server', 'Janitor', 'Labor', 'Welder', 'Cheff', 'Housekeeper']%></div>  
+    <% end %>
+  <% end %>
+    <div class = "abc">
+    <%= form.label :job_role %><br>
+    <%= form.select :job_role, ['Electrician', 'Carpenter', 'Painter', 'Plumber', 'Driver', 'Mechanic', 'Assistant', 'Nurse', 'Server', 'Janitor', 'Labor', 'Welder', 'Cheff', 'Housekeeper']%>  </div>   
+    </div>
+    <div class = "abc">
+    <%= form.label :job_description %><br>
+    <%= form.text_area :job_description %>
+    </div>    
+    <div class = "abc">
+    <%= form.label :vacancies %><br>
+    <%= form.number_field :vacancies %>
+    </div>   
+    <div class = "abc">
+    <%= form.submit 'Submit Post' %><br>
+    </div>
+  </div>
+</div>
+<% end %>

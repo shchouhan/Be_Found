@@ -1,0 +1,40 @@
+<div class= "tab">
+<p><%= notice %></p>
+
+<%= form_with url: "/search", method: :get do |form| %>
+  <div class = "abc">
+  <%= form.label :category_type, "Search for:" %>
+  <%= form.select :category_type, ['Electrician', 'Carpenter', 'Painter', 'Plumber', 'Driver', 'Mechanic', 'Assistant', 'Nurse', 'Server', 'Janitor', 'Labor', 'Welder', 'Cheff', 'Housekeeper']%> 
+  <%= form.submit "Search" %>
+  </div>
+<% end %>
+
+
+<table border= '1'>
+<%= stylesheet_link_tag "main" %>
+  <thead>
+    <tr>
+      <th class = "abc">Job Role</th><br>
+      <th class = "abc">Job Description</th><br>
+      <th class = "abc">Vacancies</th><br>
+    </tr>
+  </thead> 
+  <tbody>
+  
+
+    <% @posts.each do|post| %>
+    <tr>
+      <td class = "abc"><%= post.job_role %></td>
+      <td class = "abc"><%= post.job_description %></td>
+      <td class = "abc"><%= post.vacancies %></td>
+      <td class = "abc"><%= link_to 'View', post %></td>
+      <td class = "abc"><%= link_to 'Edit', edit_post_path(post) %></td>
+      <td class = "abc"><%= link_to 'Delete', post_path(post), data: { turbo_method: "delete", turbo_confirm: "Are you sure?" } %></td>
+    </tr>
+    <% end %>
+  </tbody>   
+  <div class = "abc">
+  <%= link_to 'Back', root_path%>
+  </div>
+</div>
+</table>
